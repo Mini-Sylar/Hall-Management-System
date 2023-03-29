@@ -2,7 +2,7 @@
 A public version of the hall management system
 
 # Try it Out
-- 👉 [Hall Management System](https://hall-management-public-dev.herokuapp.com/) 👈
+- 👉 [Hall Management System](https://hall-mangement-public.onrender.com/) 👈
 - Secret key for account creation: "*porter2023*" Case Sesntive!!!
 
 # Purpose
