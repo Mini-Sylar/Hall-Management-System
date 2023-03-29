@@ -129,7 +129,7 @@ def register():
         if request.form['password'] != request.form['confirmpassword']:
             flash("Passwords do not match check it", 'warning')
             return redirect("/SignUp")
-        elif request.form['secretkey'] != "porter2021":
+        elif request.form['secretkey'] != "porter2023":
             flash(
                 "Key provided is invalid, check with the head porter and try again", 'info')
             return redirect("/SignUp")
