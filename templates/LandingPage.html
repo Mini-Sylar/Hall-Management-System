@@ -1,0 +1,126 @@
+{% extends 'base.html' %} {% block head%}
+<!-- Required meta tags-->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Hall Management System project using python and flask"
+/>
+<meta name="author" content="Terence Quashie" />
+<meta name="keywords" content="Hall Management System" />
+
+<!-- Title Page-->
+<title>Hall Management System</title>
+
+<!-- Icons font CSS-->
+<!-- <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+<link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all"> -->
+<link
+  rel="stylesheet"
+  href="{{url_for('static',filename='css/LandingPage/main.css')}}"
+/>
+<!-- Font special for pages-->
+<link
+  href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+  rel="stylesheet"
+/>
+
+<script>
+  function allowNumbersOnly(e) {
+    var code = e.which ? e.which : e.keyCode;
+    if (code > 31 && (code < 48 || code > 57)) {
+      e.preventDefault();
+    }
+  }
+</script>
+{% endblock%} {% block body%}
+<nav class="navbar">
+  <div class="nav-00"><a class="taessa" href="/">HMS</a></div>
+  <div class="nav-01">
+    <a href="/" class="navlink1">Home</a>
+    <a href="About" class="navlink1">About</a>
+    <a href="Contact" class="navlink1">Contact</a>
+  </div>
+  <div class="nav-02">
+    {% if current_user.is_authenticated %}
+    <a href="Dashboard" class="gotodash">Go to Dashboard</a>
+    {%else%}
+    <a href="login" class="navlink2">Log in</a>
+    <div class="navlink2-signup"><a href="SignUp">Sign Up</a></div>
+    {% endif %}
+  </div>
+</nav>
+<button type="button" class="hamburger">
+  <i class="fa-solid fa-bars"></i>
+</button>
+<nav class="mobile-navbar">
+  <div class="nav-00"><a class="taessa" href="/">HMS</a></div>
+  <div class="nav-01">
+    <a href="/" class="navlink1">Home</a>
+    <a href="About" class="navlink1">About</a>
+    <a href="Contact" class="navlink1">Contact</a>
+  </div>
+  <div class="nav-02">
+    {% if current_user.is_authenticated %}
+    <a href="Dashboard" class="gotodash">Go to Dashboard</a>
+    {%else%}
+    <a href="login" class="navlink2">Log in</a>
+    <div class="navlink2-signup"><a href="SignUp">Sign Up</a></div>
+    {% endif %}
+  </div>
+</nav>
+<!-- Main Body -->
+<div class="mainpage">
+  <div class="main-01">
+    <div class="default-text">
+      Having difficulty keeping tabs on students in your hall?
+    </div>
+
+    <div class="product-name">Hall Management System</div>
+
+    <div class="description">
+      {% if current_user.is_authenticated %}
+      <p>
+        A secure and easy system to use, manually write student information in
+        books no more!
+      </p>
+      {%else%}
+      <p>
+        A secure and easy system to use, manually write student information in
+        books no more! Create an account or log in to get started!
+      </p>
+      {% endif %}
+    </div>
+
+    <div class="buttons">
+      {% if current_user.is_authenticated %}
+      <a
+        href="Dashboard"
+        class="gotodash"
+        style="
+          width: 50%;
+          text-align: center;
+          justify-content: center;
+          padding: 15px;
+          border-radius: 10px;
+        "
+        >Go to Dashboard</a
+      >
+      {%else%}
+      <a href="SignUp" class="buttons-01">Sign Up</a>
+      <a type="button" class="buttons-or">or</a>
+      <a href="login" class="buttons-02">Log in</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="main-02">
+    <div class="illustration">
+      <img
+        src="../static/css/LandingPage/images/landing-page.png"
+        alt=""
+        srcset=""
+      />
+    </div>
+  </div>
+</div>
+{% endblock%}

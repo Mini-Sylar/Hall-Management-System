@@ -1,0 +1,22 @@
+
+{% block head%}
+<link rel="stylesheet" href="{{url_for('static',filename='css/ErrorPage/main.css')}}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<title>Error Adding Student</title>
+{% endblock%}
+
+
+{% block body%}
+<div style="display: flex; justify-content: center; align-items: center; width: 100%; text-align: center;">
+    <p style='text-align:center; font-size: 32px; color: silver;'> There was a problem adding the student, most likely an ID
+    repetition,
+    kindly check it </p>
+</div>
+
+<div style="display: flex; justify-content: center;align-items: center;">
+    <button onclick="history.back()" class="buttons-01" >
+    Go Back
+</button>
+</div>
+
+{% endblock%}

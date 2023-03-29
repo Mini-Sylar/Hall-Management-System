@@ -1,0 +1,135 @@
+{% extends 'base.html' %} {% block head%}
+<link
+  rel="stylesheet"
+  href="{{url_for('static',filename='css/searchbox.css')}}"
+/>
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+/>
+<!-- ===== BOX ICONS ===== -->
+<link
+  href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+  rel="stylesheet"
+/>
+<title>Search Student</title>
+{% endblock%} {% block body%}
+<!-- <a href="/addstudent" class="dev">GO TO ADD STUDENT</a>
+<a href="/Dashboard" class="dev" style="display: flex; flex-direction: column;">GO Dashboard</a> -->
+
+<!-- LEFT TOP -->
+
+<body id="body-pd">
+  <header class="header" id="header">
+    <div class="header__toggle">
+      <i class="bx bx-menu" id="header-toggle"></i>
+    </div>
+    <div style="color: silver">
+      {% if current_user.is_authenticated %} Hi {{ current_user.username }}! {%
+      endif %}
+    </div>
+  </header>
+
+  <div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+      <div>
+        <a href="/" class="nav__logo">
+          <i class="bx bx-layer nav__logo-icon"></i>
+          <span class="nav__logo-name">HMS</span>
+        </a>
+
+        <div class="nav__list">
+          <a href="/Dashboard" class="nav__link">
+            <i class="bx bx-grid-alt nav__icon"></i>
+            <span class="nav__name">Dashboard</span>
+          </a>
+
+          <a href="/addstudent" class="nav__link">
+            <i class="bx bx-user nav__icon"></i>
+            <span class="nav__name">Add Student</span>
+          </a>
+
+          <a class="nav__link active">
+            <i class="bx bx-search-alt nav__icon"></i>
+            <span class="nav__name">Search Student</span>
+          </a>
+
+          <!-- <a href="#" class="nav__link">
+                        <i class='bx bx-bookmark nav__icon'></i>
+                        <span class="nav__name">Favorites</span>
+                    </a> -->
+
+          <a href="/StudentsData" class="nav__link">
+            <i class="bx bx-data nav__icon"></i>
+            <span class="nav__name">Data</span>
+          </a>
+
+          <a href="Analytics" class="nav__link">
+            <i class="bx bx-bar-chart-alt-2 nav__icon"></i>
+            <span class="nav__name">Analytics</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="/logout" class="nav__link">
+        <i class="bx bx-log-out nav__icon"></i>
+        <span class="nav__name">Log Out</span>
+      </a>
+    </nav>
+  </div>
+
+  <div class="make-center">
+    <div class="search-box">
+      <form action="" method="post" onsubmit="return ValidateForm();">
+        <button class="btn-search">
+          <i class="fas fa-search"></i>
+        </button>
+        <input
+          type="text"
+          class="input-search"
+          placeholder="Type to Search..."
+          name="searchQuery"
+          autocomplete="off"
+          id="required"
+        />
+      </form>
+    </div>
+  </div>
+
+  <div class="search-result">
+    {% if results is not defined and results|length == 0 %}
+    <h3 class="search-start">Search for student by name or ID</h3>
+    {% elif results|length < 1 %}
+    <h3 class="search-none">No student exists by that name or ID!</h3>
+    {% else %}
+    <table class="maintable">
+      <tr class="tablerow">
+        <th class="heading">Name</th>
+        <th class="heading">ID</th>
+        <th class="heading">Gender</th>
+        <th class="heading">Room</th>
+        <th class="heading">Phone</th>
+        <th class="heading">Course</th>
+        <th class="heading">Actions</th>
+      </tr>
+      {% for student in results %}
+      <tr class="tablerow">
+        <td class="data">{{student.student_name}}</td>
+        <td class="data">{{student.student_id}}</td>
+        <td class="data">{{student.gender}}</td>
+        <td class="data">{{student.room_number}}</td>
+        <td class="data">{{student.phone_number}}</td>
+        <td class="data">{{student.course_name}}</td>
+        <td class="data">
+          <a href="/update/{{student.id}}" class="actions">Update</a>
+          <a href="/delete/{{student.id}}" class="actions">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </div>
+  <!--===== MAIN JS =====-->
+  <script src="../static/css/Dashboard/js/main.js"></script>
+  {% endblock%}
+</body>

@@ -1,0 +1,70 @@
+{% block head%}
+<link rel="stylesheet" href="{{url_for('static',filename='css/Login/login.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/Login/util.css')}}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<title>Reset Account</title>
+{% endblock%}
+
+
+{% block body%}
+<div class="limiter">
+    <div class="container-login100 bg-01">
+        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert {{ category }}">
+                <p>{{ message|capitalize }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <form class="login100-form validate-form" method="post" action="/ResetAccount">
+                <span class="login100-form-title p-b-49">
+                    Reset Password
+                </span>
+
+                <div class="wrap-input100 validate-input m-b-23">
+                    <span class="label-input100">Email</span>
+                    <input class="input100" type="email" name="email" placeholder="Type your email" required>
+                    <!-- oninvalid="this.setCustomValidity(`Username is required`)" -->
+                    <span class="focus-input100" data-symbol="&#xf007;"> </span>
+                </div>
+
+                <!-- <div class="wrap-input100 validate-input">
+                    <span class="label-input100">Password</span>
+                    <input class="input100" type="password" name="password" placeholder="Type your password" required>
+                    <span class="focus-input100" data-symbol="&#xf023;"></span>
+                </div> -->
+
+                <div class="text-right p-t-8 p-b-31">
+                    <!-- <a href="#">
+                        Forgot password?
+                    </a> -->
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button class="login100-form-btn">
+                            Send Email
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex-col-c p-t-155">
+                    <a href="SignUp" class="txt2">
+                        Sign Up Instead
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+
+
+{% endblock%}

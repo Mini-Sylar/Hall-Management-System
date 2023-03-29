@@ -1,0 +1,232 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(-45deg, #3ca7ee, #300515, #093849, #05634d);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite, fadein 0.2s ease-in;
+  height: 100vh;
+  font-family: "Lato" !important;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.make-center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-box {
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+.input-search {
+  height: 50px;
+  width: 50px;
+  border-style: none;
+  padding: 10px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  outline: none;
+  border-radius: 25px;
+  transition: all 0.5s ease-in-out;
+  background-color: #22a6b3;
+  padding-right: 40px;
+  color: #fff;
+}
+.input-search::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 100;
+}
+.btn-search {
+  width: 50px;
+  height: 50px;
+  border-style: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  right: 0px;
+  color: #ffffff;
+  background-color: transparent;
+  pointer-events: painted;
+}
+.btn-search:focus ~ .input-search {
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+}
+.input-search:focus {
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+}
+
+.search-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+  width: 100%;
+}
+
+.search-start {
+  font-family: "Lato" !important;
+  color: silver;
+  font-weight: bolder;
+}
+
+.search-none {
+  font-family: "Lato" !important;
+  color: rgb(235, 201, 201);
+  font-weight: bolder;
+  font-size: xx-large;
+}
+
+.maintable {
+  width: 80%;
+  height: 20%;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  font-family: "Lato" !important;
+  font-size: larger;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.heading,
+.data {
+  height: 4rem;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.data {
+  font-size: large;
+  color: rgb(204, 203, 203);
+}
+
+.heading {
+  text-align: center;
+  font-size: larger;
+}
+
+thead th {
+  background-color: #55608f;
+}
+
+tbody tr :hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease-in;
+  border-radius: 2px;
+}
+
+td :hover ::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9999px;
+  bottom: -9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+}
+
+.actions {
+  text-decoration: none;
+  display: block;
+  color: aqua;
+  line-height: 30px;
+}
+
+/* Fade Page in on load */
+@keyframes fadein {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadein {
+  /* Firefox */
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadein {
+  /* Safari and Chrome */
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-o-keyframes fadein {
+  /* Opera */
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .search-result {
+    margin: 0 auto;
+    width: 100%;
+    overflow-x: scroll;
+    margin-top: 2rem;
+  }
+
+  .maintable {
+    width: 100%;
+    font-size: 10px;
+  }
+  .data{
+    font-size: 10px;
+  }
+  .heading,.data{
+    padding: 0;
+    width: 80%;
+    padding: 5px;
+    padding-top: 20px;
+  }
+
+  .data{
+    width: 10%;
+  }
+}

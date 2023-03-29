@@ -1,0 +1,226 @@
+{% extends 'base.html' %} {% block head%}
+<!-- Required meta tags-->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Hall Management System project using python and flask"
+/>
+<meta name="author" content="Terence Quashie" />
+<meta name="keywords" content="Hall Management System" />
+
+<!-- Title Page-->
+<title>Add Students</title>
+
+<!-- Icons font CSS-->
+<!-- <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+<link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all"> -->
+<!-- ===== BOX ICONS ===== -->
+<link
+  href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+  rel="stylesheet"
+/>
+<!-- Font special for pages-->
+<link
+  href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+  rel="stylesheet"
+/>
+<script>
+  function allowNumbersOnly(e) {
+    var code = e.which ? e.which : e.keyCode;
+    if (code > 31 && (code < 48 || code > 57)) {
+      e.preventDefault();
+    }
+  }
+</script>
+{% endblock%} {% block body%}
+<!-- LEFT TOP -->
+
+<body id="body-pd">
+  <header class="header" id="header">
+    <div class="header__toggle">
+      <i class="bx bx-menu" id="header-toggle"></i>
+    </div>
+    <div style="color: silver">
+      {% if current_user.is_authenticated %} Hi {{ current_user.username }}! {%
+      endif %}
+    </div>
+  </header>
+
+  <div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+      <div>
+        <a href="/" class="nav__logo">
+          <i class="bx bx-layer nav__logo-icon"></i>
+          <span class="nav__logo-name">HMS</span>
+        </a>
+
+        <div class="nav__list">
+          <a href="/Dashboard" class="nav__link">
+            <i class="bx bx-grid-alt nav__icon"></i>
+            <span class="nav__name">Dashboard</span>
+          </a>
+
+          <a class="nav__link active">
+            <i class="bx bx-user nav__icon"></i>
+            <span class="nav__name">Add Student</span>
+          </a>
+
+          <a href="/SearchStudent" class="nav__link">
+            <i class="bx bx-search-alt nav__icon"></i>
+            <span class="nav__name">Search Student</span>
+          </a>
+
+          <!-- <a href="#" class="nav__link">
+                        <i class='bx bx-bookmark nav__icon'></i>
+                        <span class="nav__name">Favorites</span>
+                    </a> -->
+
+          <a href="/StudentsData" class="nav__link">
+            <i class="bx bx-data nav__icon"></i>
+            <span class="nav__name">Data</span>
+          </a>
+
+          <a href="/Analytics" class="nav__link">
+            <i class="bx bx-bar-chart-alt-2 nav__icon"></i>
+            <span class="nav__name">Analytics</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="/logout" class="nav__link">
+        <i class="bx bx-log-out nav__icon"></i>
+        <span class="nav__name">Log Out</span>
+      </a>
+    </nav>
+  </div>
+
+  <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w680">
+      <div class="card card-4">
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <div class="notification is-success">
+          <p>{{ messages[0] }}</p>
+          <p>
+            Quick Actions:&nbsp;<a href="SearchStudent"> Search Student</a
+            >&nbsp;or back to&nbsp; <a href="Dashboard">Dashboard</a>
+          </p>
+        </div>
+        {% endif %} {% endwith %}
+
+        <div class="card-body">
+          <h2 class="title">Registration Form</h2>
+          <form action="" method="POST" onsubmit="return ValidateForm();">
+            <div class="row row-space">
+              <div class="col-2">
+                <div class="input-group">
+                  <label class="label">first name</label>
+                  <input
+                    class="input--style-4"
+                    type="text"
+                    name="first_name"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                  <label class="label">last name</label>
+                  <input
+                    class="input--style-4"
+                    type="text"
+                    name="last_name"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row row-space">
+              <div class="col-2">
+                <div class="input-group">
+                  <label class="label">Student ID</label>
+                  <div class="input-group-icon">
+                    <input
+                      class="input--style-4 js-datepicker"
+                      type="text"
+                      name="studentID"
+                      maxlength="8 "
+                      minlength="8"
+                      onkeypress="allowNumbersOnly(event)"
+                    />
+                    <i
+                      class="zmdi zmdi-calendar-note input-icon js-btn-calendar"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                  <label class="label">Gender</label>
+                  <div class="p-t-10">
+                    <label class="radio-container m-r-45"
+                      >Male
+                      <input type="radio" name="gender" value="Male" required />
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container"
+                      >Female
+                      <input
+                        type="radio"
+                        name="gender"
+                        value="Female"
+                        required
+                      />
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row row-space">
+              <div class="col-2">
+                <div class="input-group">
+                  <label class="label">Room Number</label>
+                  <input class="input--style-4" type="text" name="roomnumber" />
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                  <label class="label">Phone Number</label>
+                  <input
+                    class="input--style-4"
+                    type="text"
+                    name="phone"
+                    maxlength="10"
+                    minlength="10"
+                    onkeypress="allowNumbersOnly(event)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="label">Course</label>
+              <div class="rs-select2 js-select-simple select--no-search">
+                <input class="input--style-4" type="text" name="course" />
+                <div class="select-dropdown"></div>
+              </div>
+            </div>
+            <div class="p-t-15">
+              <button
+                class="btn btn--radius-2 btn--blue"
+                type="submit"
+                id="submitbutton"
+                onclick="my"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<!--===== MAIN JS =====-->
+<script src="../static/css/Dashboard/js/main.js"></script>
+{% endblock%}

@@ -1,0 +1,223 @@
+{% block head%}
+<link
+  rel="stylesheet"
+  href="{{url_for('static',filename='css/Register/main.css')}}"
+/>
+<link
+  rel="stylesheet"
+  href="{{url_for('static',filename='css/Login/util.css')}}"
+/>
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+/>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="../static/css/Dashboard/js/main.js"></script>
+<title>Register</title>
+
+<script>
+  $(document).on("click", ".toggle-confirmpassword", function () {
+    $(this).toggleClass("fa-eye fa-eye-slash");
+
+    var input = $("#confirminput");
+    if (input.attr("type") === "password") {
+      input.attr("type", "text");
+      input.attr("placeholder", "Confirm Password");
+    } else {
+      input.attr("type", "password");
+      input.attr("placeholder", "**********");
+    }
+  });
+
+  $(document).on("click", ".toggle-password", function () {
+    $(this).toggleClass("fa-eye fa-eye-slash");
+
+    var input = $("#passinput");
+    if (input.attr("type") === "password") {
+      input.attr("type", "text");
+      input.attr("placeholder", "Enter Password");
+    } else {
+      input.attr("type", "password");
+      input.attr("placeholder", "**********");
+    }
+  });
+
+  $(document).on("click", ".toggle-secret", function () {
+    $(this).toggleClass("fa-eye fa-eye-slash");
+
+    var input = $("#showMySecret");
+    if (input.attr("type") === "password") {
+      input.attr("type", "text");
+      input.attr("placeholder", "Enter Secret Key");
+    } else {
+      input.attr("type", "password");
+      input.attr("placeholder", "**********");
+    }
+  });
+</script>
+{% endblock%} {% block body%}
+<div class="limiter">
+  <div class="container-login100">
+    <div class="login100-more card" style="background-color: black">
+      <!-- Photo 1 -->
+      <div class="card_part card_part-one"></div>
+      <!-- Photo 2 -->
+      <div class="card_part card_part-two"></div>
+      <!-- Photo 3 -->
+      <div class="card_part card_part-three"></div>
+      <!-- Photo 4 -->
+      <div class="card_part card_part-four"></div>
+    </div>
+
+    <script>
+      var myIndex = 0;
+      carousel();
+
+      function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) {
+          myIndex = 1;
+        }
+        x[myIndex - 1].style.display = "block";
+        setTimeout(carousel, 9000);
+      }
+    </script>
+    <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %} {% if category ==
+      'error'%}
+      <div class="alert {{ category }}">
+        {{ message|capitalize }} or go to <a href="/login">Login</a> to sign in
+      </div>
+      {% else %}
+      <div class="alert {{ category }}">{{ message|capitalize }}</div>
+      {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+      <form class="login100-form validate-form" method="post">
+        <span class="login100-form-title p-b-59"> Sign Up </span>
+
+        <div class="wrap-input100 validate-input">
+          <span class="label-input100">Full Name</span>
+          <input
+            class="input100"
+            type="text"
+            name="fullname"
+            placeholder="Name..."
+            required
+          />
+          <span class="focus-input100"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input">
+          <span class="label-input100">Email</span>
+          <input
+            class="input100"
+            type="text"
+            name="email"
+            placeholder="Email address..."
+            required
+          />
+          <span class="focus-input100"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input">
+          <span class="label-input100">Username</span>
+          <input
+            class="input100"
+            type="text"
+            name="username"
+            placeholder="Username..."
+            required
+          />
+          <span class="focus-input100"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input">
+          <span class="label-input100">Password</span>
+          <input
+            class="input100"
+            type="password"
+            name="password"
+            placeholder="**********"
+            required
+            minlength="5"
+            id="passinput"
+          />
+          <span
+            toggle="#password-field"
+            class="fa fa-fw fa-eye field_icon toggle-password toggle"
+          ></span>
+          <span class="focus-input100"></span>
+        </div>
+        <div class="wrap-input100 validate-input">
+          <span class="label-input100">Confirm Password</span>
+          <input
+            class="input100"
+            type="password"
+            name="confirmpassword"
+            placeholder="**********"
+            required
+            id="confirminput"
+          />
+          <span
+            toggle="#password-field"
+            class="fa fa-fw fa-eye field_icon toggle-confirmpassword toggle"
+          ></span>
+          <span class="focus-input100"></span>
+        </div>
+        <div class="wrap-input100 validate-input">
+          <span class="label-input100">Secret Key</span>
+          <input
+            class="input100"
+            type="password"
+            name="secretkey"
+            placeholder="**********"
+            required
+            id="showMySecret"
+          />
+          <span
+            toggle="#password-field"
+            class="fa fa-fw fa-eye field_icon toggle-secret toggle"
+          ></span>
+          <span class="focus-input100"></span>
+        </div>
+        <!-- <div class="flex-m w-full p-b-33">
+
+                </div> -->
+
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn">Sign Up</button>
+          </div>
+
+          <a
+            href="login"
+            class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30"
+          >
+            Sign in
+            <i class="fa fa-long-arrow-right m-l-5"></i>
+          </a>
+          <a
+            href="/"
+           
+            class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30 homepage"
+          >
+            Home Page
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock%}

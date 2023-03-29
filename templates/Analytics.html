@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ===== BOX ICONS ===== -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="../static/css/Analytics/css/styles.css" />
+    <!-- Pie Chart -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"
+      integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <title>Analytics</title>
+  </head>
+
+  <body id="body-pd">
+    <header class="header" id="header">
+      <div class="header__toggle">
+        <i class="bx bx-menu" id="header-toggle"></i>
+      </div>
+      <!-- <div class="header__img">
+            <img src="assets/img/perfil.jpg" alt="">
+            {% if current_user.is_authenticated %}
+            Hi {{ current_user.username }}!
+            {% endif %}
+        </div> -->
+      <div style="color: silver">
+        {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
+        {% endif %}
+      </div>
+    </header>
+
+    <div class="l-navbar" id="nav-bar">
+      <nav class="nav">
+        <div>
+          <a href="/" class="nav__logo">
+            <i class="bx bx-layer nav__logo-icon"></i>
+            <span class="nav__logo-name">HMS</span>
+          </a>
+
+          <div class="nav__list">
+            <a href="Dashboard" class="nav__link">
+              <i class="bx bx-grid-alt nav__icon"></i>
+              <span class="nav__name">Dashboard</span>
+            </a>
+
+            <a href="/addstudent" class="nav__link">
+              <i class="bx bx-user nav__icon"></i>
+              <span class="nav__name">Add Student</span>
+            </a>
+
+            <a href="/SearchStudent" class="nav__link">
+              <i class="bx bx-search-alt nav__icon"></i>
+              <span class="nav__name">Search Student</span>
+            </a>
+
+            <!-- <a href="#" class="nav__link">
+                        <i class='bx bx-bookmark nav__icon'></i>
+                        <span class="nav__name">Favorites</span>
+                    </a> -->
+
+            <a href="/StudentsData" class="nav__link">
+              <i class="bx bx-data nav__icon"></i>
+              <span class="nav__name">Data</span>
+            </a>
+
+            <a class="nav__link active">
+              <i class="bx bx-bar-chart-alt-2 nav__icon"></i>
+              <span class="nav__name">Analytics</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="/logout" class="nav__link">
+          <i class="bx bx-log-out nav__icon"></i>
+          <span class="nav__name">Log Out</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="components">
+      <div class="section1">
+        <div class="section-header">
+          <span>Users & Chart</span>
+        </div>
+        <div class="section1-components">
+          <div class="section1-1 tile-shape">
+            <table class="maintable">
+              <tr class="">
+                <th class="newheading">Full Name</th>
+                <th class="newheading">Email</th>
+              </tr>
+              {% for person in results %}
+              <tr class="tablerow">
+                <td class="newrow">{{person.fullname}}</td>
+                <td class="newrow">{{person.email }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+
+          <div class="section1-2 tile-shape">
+            <h3 style="color: white">Genders</h3>
+            <canvas
+              id="Genders"
+              style="
+                max-height: 60%;
+                position: relative;
+                bottom: 10px;
+                -webkit-box-reflect: below 1px
+                  linear-gradient(transparent, rgba(255, 255, 255, 0.1));
+              "
+            ></canvas>
+            <script>
+              const getgender = document
+                .getElementById("Genders")
+                .getContext("2d");
+              const Genders = new Chart(getgender, {
+                type: "doughnut",
+                data: {
+                  labels: ["Female", "Male"],
+                  datasets: [
+                    {
+                      label: "Genders",
+                      data: ["{{ female|safe}}", "{{ male|safe}}"],
+                      backgroundColor: [
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                      ],
+                      borderColor: [
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(54, 162, 235, 1)",
+                      ],
+                      borderWidth: 1,
+                    },
+                  ],
+                },
+                options: {
+                  plugins: {
+                    legend: {
+                      labels: {
+                        font: {
+                          size: 12,
+                        },
+                        color: "white",
+                      },
+                    },
+                  },
+                },
+              });
+            </script>
+            <h2>Number of Male students: {{ male|safe}}</h2>
+            <h2>Number of Female students: {{ female|safe}}</h2>
+            <h2>Total Number Of Students:{{ total|safe}}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="section2">
+        <div class="section-header">
+          <span>Graphs</span>
+        </div>
+        <div class="section2-components">
+          <div class="section2-1 tile-shape">
+            <canvas id="myChart" style="max-height: 100%"></canvas>
+
+            <script>
+              var today = new Date()
+                .toString()
+                .split(" ")
+                .splice(1, 3)
+                .join(" ");
+              var xValues = [today];
+              var barColors = ["red", "green", "blue", "orange", "brown"];
+
+              new Chart(document.getElementById("myChart"), {
+                type: "bar",
+                data: {
+                  color: "white",
+                  labels: xValues,
+                  datasets: [
+                    {
+                      fontColor: "#fff",
+                      label: "Activity Today",
+                      backgroundColor: "red",
+                      data: ["{{day1|safe}}"],
+                    },
+                    {
+                      label: "Registered",
+                      backgroundColor: "green",
+                      data: ["{{register_count|safe}}"],
+                    },
+                    {
+                      label: "Students",
+                      backgroundColor: "blue",
+                      data: ["{{total|safe}}"],
+                    },
+                  ],
+                },
+
+                options: {
+                  plugins: {
+                    legend: {
+                      labels: {
+                        font: {
+                          size: 12,
+                        },
+                        color: "white",
+                      },
+                    },
+                  },
+                  responsive: true,
+                  title: {
+                    display: false,
+                  },
+                  legend: {
+                    display: false,
+                  },
+                },
+              });
+            </script>
+          </div>
+        </div>
+      </div>
+      <div class="section3">
+        <div class="section-header">
+          <span>Tickets</span>
+        </div>
+        <div class="section3-components">
+          <div class="section3-1 widget-shape">
+            <table class="maintable">
+              <tr class="tablerow">
+                <th class="heading">Assignee</th>
+                <th class="heading">Action</th>
+                <th class="heading">Date</th>
+                <th class="heading">Modified</th>
+                <!-- <th class="heading">Ticket ID</th> -->
+              </tr>
+              {% for person in activity %}
+              <tr class="tablerow">
+                <td class="data">{{person.assignee}}</td>
+                <td class="data">{{person.action}}</td>
+                <td class="data">
+                  {{person.date_created.strftime("%d-%m-%Y %I:%M:%S%p").lower()
+                  }}
+                </td>
+                <td class="data">{{person.person_modified}}</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--===== MAIN JS =====-->
+    <script src="../static/css/Dashboard/js/main.js"></script>
+    <!-- <script src="../static/JS/detect.js"></script> -->
+  </body>
+</html>

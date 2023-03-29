@@ -1,0 +1,89 @@
+{% extends 'base.html' %} {% block head%}
+<!-- Required meta tags-->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Hall Management System project using python and flask" />
+<meta name="author" content="Terence Quashie" />
+<meta name="keywords" content="Hall Management System" />
+
+<!-- Title Page-->
+<title>About Us</title>
+
+<!-- Icons font CSS-->
+<link
+  rel="stylesheet"
+  href="{{url_for('static',filename='css/AboutUs/main.css')}}"
+/>
+<!-- Font special for pages-->
+<link
+  href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+  rel="stylesheet"
+/>
+
+<script>
+  function allowNumbersOnly(e) {
+    var code = e.which ? e.which : e.keyCode;
+    if (code > 31 && (code < 48 || code > 57)) {
+      e.preventDefault();
+    }
+  }
+</script>
+{% endblock%} {% block body%}
+<nav class="navbar">
+  <div class="nav-00"><a class="taessa" href="/">HMS</a></div>
+  <div class="nav-01">
+    <a href="/" class="navlink1">Home</a>
+    <a href="About" class="navlink1">About</a>
+    <a href="Contact" class="navlink1">Contact</a>
+  </div>
+  <div class="nav-02">
+    {% if current_user.is_authenticated %}
+    <a href="Dashboard" class="gotodash">Go to Dashboard</a>
+    {%else%}
+    <a href="login" class="navlink2">Log in</a>
+    <div class="navlink2-signup"><a href="SignUp">Sign Up</a></div>
+    {% endif %}
+  </div>
+</nav>
+
+<button type="button" class="hamburger">
+  <i class="fa-solid fa-bars"></i>
+</button>
+<nav class="mobile-navbar">
+  <div class="nav-00"><a class="taessa" href="/">HMS</a></div>
+  <div class="nav-01">
+    <a href="/" class="navlink1">Home</a>
+    <a href="About" class="navlink1">About</a>
+    <a href="Contact" class="navlink1">Contact</a>
+  </div>
+  <div class="nav-02">
+    {% if current_user.is_authenticated %}
+    <a href="Dashboard" class="gotodash">Go to Dashboard</a>
+    {%else%}
+    <a href="login" class="navlink2">Log in</a>
+    <div class="navlink2-signup"><a href="SignUp">Sign Up</a></div>
+    {% endif %}
+  </div>
+</nav>
+<!-- Main Body -->
+<div class="mainpage">
+  <div class="main-01">
+    <div class="default-text">
+      <h1 class="team"> Our Work</h1>
+    </div>
+
+    <div class="product-name">
+      <p class="desc">
+        HMS's work is focused on making the management of student parties
+        easier and less complicated, while simultaneously increasing workflow.
+        With the Hall Management System, users are guaranteed to have an easier
+        time managing the large student count in various halls of residence
+      </p>
+    </div>
+  </div>
+  <div class="main-02">
+    <a href="https://github.com/Mini-Sylar" class="team" target="_blank">Terence Quashie</a>
+  </div>
+  </div>
+</div>
+{% endblock%}
