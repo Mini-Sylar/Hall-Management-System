@@ -3,7 +3,7 @@ A public version of the hall management system
 
 # Try it Out
 - 👉 [Hall Management System](https://hall-mangement-public.onrender.com/) 👈
-- Secret key for account creation: "*porter2023*" Case Sesntive!!!
+- Secret key for account creation: "*porter2021*" Case Sesntive!!!
 
 # Purpose
 - Provide porters with an easier way to manage students entering and leaving the hall
